@@ -1,8 +1,9 @@
 import pandas as pd
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QFileDialog, QVBoxLayout
+import PyQt5
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QFileDialog, QVBoxLayout, QLabel, QMessageBox
 from PyQt5.QtCore import pyqtSignal
-
+from PyQt5.QtGui import QPixmap
 from datetime import date, timedelta, datetime
 from collections import Counter
 
@@ -22,15 +23,7 @@ def browse_file():
     if file_path:
         print("Selected file:", file_path)
         selected_path = file_path
-        app.quit()  # Close the application after selection
-
-def browse_directory():
-    global selected_path
-    options = QFileDialog.Options()
-    directory_path = QFileDialog.getExistingDirectory(None, "Select Directory", "", options=options)
-    if directory_path:
-        print("Selected directory:", directory_path)
-        selected_path = directory_path
+        QMessageBox.information(None, 'Message', 'Chosen file: ' + selected_path + '\n\n\nfile completed, find it at errorsout.xlsx')
         app.quit()  # Close the application after selection
 
 # Create the application object
@@ -38,23 +31,31 @@ app = QApplication(sys.argv)
 
 # Create the main application window (QWidget)
 root = QWidget()
-root.setWindowTitle("File Dialog Example")
+root.setWindowTitle("Choose the needed file:")
 
 # Create buttons to browse file and directory
 file_button = QPushButton("Browse File", root)
 file_button.clicked.connect(browse_file)
-
-directory_button = QPushButton("Browse Directory", root)
-directory_button.clicked.connect(browse_directory)
+file_button.setFixedSize(400, 50)
 
 # Arrange the buttons in a vertical layout
-layout = QVBoxLayout()
-layout.addWidget(file_button)
-layout.addWidget(directory_button)
+layout = QVBoxLayout(root)
+layout.addStretch(1)
+layout.addWidget(file_button, 0, alignment=PyQt5.QtCore.Qt.AlignHCenter)
 root.setLayout(layout)
+
+
+image_path = '/home/antd/pyprojects/dublicates_Project/monkey.webp'
+pixmap = QPixmap(image_path)
+label = QLabel(root)
+label.setPixmap(pixmap)
+label.setScaledContents(True)
+label.resize(700, 400)
 
 # Show the main window
 root.show()
+root.resize(700, 500)
+
 
 # Execute the application event loop
 app.exec_()
