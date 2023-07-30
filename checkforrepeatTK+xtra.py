@@ -1,7 +1,7 @@
 import pandas as pd
 import sys
 import PyQt5
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QFileDialog, QVBoxLayout, QLabel, QMessageBox
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QFileDialog, QVBoxLayout, QLabel, QMessageBox, QLineEdit
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import QPixmap
 from datetime import date, timedelta, datetime
@@ -45,12 +45,15 @@ layout.addWidget(file_button, 0, alignment=PyQt5.QtCore.Qt.AlignHCenter)
 root.setLayout(layout)
 
 # place the image to make an app look more silly
-image_path = '/home/antd/pyprojects/dublicates_Project/monkey.webp'
+image_path = 'monkey.webp'
 pixmap = QPixmap(image_path)
 label = QLabel(root)
 label.setPixmap(pixmap)
 label.setScaledContents(True)
 label.resize(700, 400)
+
+# delim = QLineEdit(root)
+# root.setLayout(delim)
 
 # Show the main window
 root.show()
