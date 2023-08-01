@@ -23,7 +23,7 @@ def browse_file():
     if file_path:
         print("Selected file:", file_path)
         selected_path = file_path
-        QMessageBox.information(None, 'Message', 'Chosen file: ' + selected_path + '\n\n\nfile completed, find it at errorsout.xlsx')
+        QMessageBox.information(None, 'Message', 'Chosen file: ' + selected_path + '\n\n\nfile completed, find it errors.txt and errorsout.xlsx')
         app.quit()  # Close the application after selection
 
 # Create the application object
@@ -103,7 +103,7 @@ with open ('errors.txt', 'w') as file:
             db_temp.append({i: problems})
 
         if problems:
-            file.write(str(i) + ' ' + str(pibs.get(i))+ ' -> ' + ' '.join(problems) + '\n')
+            file.write(str(i) + ' ' + str(pibs.get(i))+ ' -> ' + str(len(problems))+'days ' + ' '.join(problems) + '\n')
 
 transformed_data = dict()
 for d in db_temp:
