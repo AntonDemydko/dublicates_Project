@@ -108,7 +108,7 @@ with open ('errors.txt', 'w') as file:
 transformed_data = dict()
 for d in db_temp:
     for key, values in d.items():
-        transformed_data[key] = [pibs.get(key)] + values
+        transformed_data[key] = [pibs.get(key)] +[len(values)] + values
 
 maxlen = max(len(values) for values in transformed_data.values())
 for key in transformed_data:
